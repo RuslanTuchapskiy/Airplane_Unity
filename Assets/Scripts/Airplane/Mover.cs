@@ -19,7 +19,7 @@ public class Mover : MonoBehaviour
     }
 
     private void FixedUpdate(){
-        _rigidbody.AddTorque(-_verticalInput * _torqueForce,_horizontalInput*_torqueForce,-_horizontalInput*_torqueForce);
+        _rigidbody.AddRelativeTorque(-_verticalInput * _torqueForce,0f,-_horizontalInput*_torqueForce);
          
     }
 }
