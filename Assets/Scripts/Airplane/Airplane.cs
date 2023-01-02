@@ -11,7 +11,7 @@ public class Airplane : MonoBehaviour
     private int _scoreValue;
     public int  HealthValue =>_healthValue;
 
-    public event UnityAction <int> HealthChenged;
+    public event UnityAction <bool> HealthChenged;
 
     private void Start()=> _healthText.text = _healthValue.ToString();
 private void OnTriggerEnter(Collider other)
@@ -27,10 +27,22 @@ private void OnTriggerEnter(Collider other)
         {
             _healthValue--;
             _healthText.text = _healthValue.ToString();
-            HealthChenged?.Invoke(_healthValue);
+            HealthChenged?.Invoke(false);
             Destroy(other.gameObject);
+            if(_healthValue==0){
+                Destroy(this.gameObject);
+            }
         }
-           
+           else if (other.TryGetComponent(out Heart heart))
+        {
+            if(_healthValue<5){
+            _healthValue++;
+            _healthText.text = _healthValue.ToString();
+             HealthChenged?.Invoke(true);
+            }
+            Destroy(other.gameObject);
+          
+        }
     }
  
 }

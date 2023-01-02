@@ -6,6 +6,7 @@ public class Spawner : MonoBehaviour
 {
     [SerializeField] private Bomb _bombTemplate;
     [SerializeField] private Coin _coinTemplate;
+    [SerializeField] private Heart _heartTemplate;
     [SerializeField] private int _objectsCount;
 
 
@@ -13,12 +14,14 @@ public class Spawner : MonoBehaviour
 
         for(int i =0;i<_objectsCount;i++){
             Vector3 randomSpawnVector = new Vector3(Random.Range(-100,100),Random.Range(-100,100),Random.Range(-100,100));
+            var rand = Random.Range(0,3);
 
-            if(Random.Range(0,3)==0)
+            if(rand==0)
                   Instantiate(_coinTemplate,randomSpawnVector,Quaternion.identity,transform);
-            else
+            else if (rand==1)
                  Instantiate(_bombTemplate,randomSpawnVector,Quaternion.identity,transform);
-            
+            else  
+                Instantiate(_heartTemplate,randomSpawnVector,Quaternion.identity,transform);
            
 
         }
